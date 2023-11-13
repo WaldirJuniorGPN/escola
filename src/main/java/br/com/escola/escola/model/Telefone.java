@@ -7,6 +7,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity(name = "Telefone")
 @Table(name = "telefones")
 @NoArgsConstructor
@@ -27,5 +29,16 @@ public class Telefone {
     public Telefone(DadosTelefone dados) {
         this.ddd = dados.ddd();
         this.telefone = dados.telefone();
+    }
+
+    public void atualizarDados(List<Telefone> telefones, DadosAtualizacaoTelefone dados) {
+        var telefoneParaAtualizar = telefones.stream()
+                .filter(t -> t.equals(dados.telefone()))
+                .findFirst()
+                .orElse(null);
+
+        if (telefoneParaAtualizar != null) {
+            this.telefone = dados.telefone();
+        }
     }
 }
