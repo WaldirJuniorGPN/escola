@@ -12,6 +12,8 @@ public record DadosCadastroAluno(
         String nome,
         @Valid
         DadosEmail email,
+        @NotBlank
+        String senha,
         @Valid DadosTelefone telefone
 ) {
 }

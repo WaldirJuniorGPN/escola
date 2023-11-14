@@ -8,6 +8,7 @@ public record DadosAtualizacaoAluno(
         Long id,
         String cpf,
         String nome,
+        String senha,
         @Valid
         DadosAtualizacaoEmail email,
         @Valid
