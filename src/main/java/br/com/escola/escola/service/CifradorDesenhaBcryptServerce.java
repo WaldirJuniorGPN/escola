@@ -1,7 +1,9 @@
 package br.com.escola.escola.service;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CifradorDesenhaBcryptServerce {
 
     BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();

@@ -30,6 +30,7 @@ public class AlunoController {
     public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroAluno dados, UriComponentsBuilder uriComponentsBuilder) {
         var senhaCifrada = cifrador.cifrarSenha(dados.senha());
         var aluno = new Aluno(dados, senhaCifrada);
+        this.alunoRepository.save(aluno);
         var uri = uriComponentsBuilder.path("usuario/{id}").buildAndExpand(aluno.getId()).toUri();
         return ResponseEntity.created(uri).body(new DadosDetalhamentoAluno(aluno));
     }
@@ -46,8 +47,8 @@ public class AlunoController {
         var aluno = this.alunoRepository.getReferenceById(dados.id());
 
         if (dados.senha() != null) {
-         var senhaCifradaAtualizada = this.cifrador.cifrarSenha(dados.senha());
-         aluno.atualizarSenha(senhaCifradaAtualizada);
+         var senhaAtualizada = this.cifrador.cifrarSenha(dados.senha());
+         aluno.atualizarSenha(senhaAtualizada);
         }
 
         aluno.atualizarDados(dados);
